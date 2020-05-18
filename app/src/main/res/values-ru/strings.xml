@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">A1L1</string>
+    <string name="weather_forecast">Прогноз погоды</string>
+    <string name="_2020">2020</string>
+    <string name="enter_your_city">Введите ваш город</string>
+    <string name="start">Старт</string>
+    <string name="to_be_continued">Продолжение следует</string>
+</resources>

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">A1L1</string>
+    <string name="weather_forecast">Weather forecast</string>
+    <string name="_2020">2020</string>
+    <string name="enter_your_city">Enter your city</string>
+    <string name="start">Start</string>
+    <string name="to_be_continued">To be continued</string>
 </resources>

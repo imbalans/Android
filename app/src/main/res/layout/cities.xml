@@ -14,6 +14,7 @@
         android:textSize="35sp" />
 
     <Button
+        android:id="@+id/BtnMoscow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -23,6 +24,7 @@
         android:textSize="32sp" />
 
     <Button
+        android:id="@+id/BtnStPetersburg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -32,6 +34,7 @@
         android:textSize="32sp" />
 
     <Button
+        android:id="@+id/BtnSochi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -41,6 +44,7 @@
         android:textSize="32sp" />
 
     <Button
+        android:id="@+id/BtnKazan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -59,6 +63,7 @@
         android:textSize="35sp" />
 
     <EditText
+        android:id="@+id/enterCity"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -80,9 +85,10 @@
             android:textSize="32sp" />
 
         <CheckBox
+            android:id="@+id/checkboxSpeed"
             android:layout_width="wrap_content"
             android:layout_height="43dp"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -100,13 +106,15 @@
             android:textSize="32sp" />
 
         <CheckBox
+            android:id="@+id/checkboxPressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp" />
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/BtnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

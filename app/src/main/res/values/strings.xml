@@ -27,4 +27,5 @@
     <string name="dark_theme">Dark Theme</string>
     <string name="geolocation">Geolocation</string>
     <string name="city">City</string>
+    <string name="wiki_site">wiki</string>
 </resources>

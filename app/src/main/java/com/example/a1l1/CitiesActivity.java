@@ -20,7 +20,7 @@ public class CitiesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cities);
+        setContentView(R.layout.activity_cities);
         initView();
         setOnClickListenerForStart();
         setOnCLickListenerForMoscow();

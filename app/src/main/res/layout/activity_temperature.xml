@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_weight="2"
-            android:text="Wind speed: 1.0 m/s"
+            android:text="@string/wind_speed_temp"
             android:textSize="20sp"
             android:visibility="invisible" />
 
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:text="Pressure: 750 mm"
+            android:text="@string/pressure_temp"
             android:textSize="20sp"
             android:visibility="invisible" />
     </LinearLayout>

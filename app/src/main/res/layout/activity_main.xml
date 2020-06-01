@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/WeatherTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/weather_forecast"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.523" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/DateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="bottom"
@@ -33,15 +33,15 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/WeatherImage"
         android:layout_width="257dp"
         android:layout_height="153dp"
         android:layout_marginBottom="532dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/DateTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/meteotrend_sun_and_cloud2" />
+        app:srcCompat="@drawable/sun_and_cloud" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,4 +29,6 @@
     <string name="geolocation">Геолокация</string>
     <string name="city">Город</string>
     <string name="wiki_site">wiki</string>
+    <string name="wind_speed_temp">Скорость ветра: 1.0 м/с</string>
+    <string name="pressure_temp">Давление: 750 мм</string>
 </resources>

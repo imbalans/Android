@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class TemperatureActivity extends AppCompatActivity {
@@ -15,7 +14,7 @@ public class TemperatureActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.temperature);
+        setContentView(R.layout.activity_temperature);
         initView();
         setOnClickListenerBtnReturn();
         showReceivedData();
@@ -42,8 +41,8 @@ public class TemperatureActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String city = intent.getStringExtra(CitiesActivity.textDataKey);
         String degrees = intent.getStringExtra(CitiesActivity.textDegreesKey);
-        Boolean speed = intent.getBooleanExtra(CitiesActivity.checkBoxKeySpeed, false);
-        Boolean pressure = intent.getBooleanExtra(CitiesActivity.checkBoxKeyPressure, false);
+        boolean speed = intent.getBooleanExtra(CitiesActivity.checkBoxKeySpeed, false);
+        boolean pressure = intent.getBooleanExtra(CitiesActivity.checkBoxKeyPressure, false);
         cityView.setText(city);
         degreesView.setText(degrees);
 

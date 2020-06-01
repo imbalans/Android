@@ -69,7 +69,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:hint="@string/enter_your_city" />
+        android:hint="@string/enter_your_city"
+        android:inputType="text" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -77,7 +78,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_weight="2"
@@ -97,7 +98,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="15dp"

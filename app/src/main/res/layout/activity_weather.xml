@@ -23,4 +23,12 @@
         android:text=""
         android:textSize="40sp" />
 
+    <Button
+        android:id="@+id/btnHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/history"
+        android:textSize="20sp" />
+
 </LinearLayout>

@@ -31,4 +31,5 @@
     <string name="wind_speed_temp">Wind speed: 1.0 m/s</string>
     <string name="pressure_temp">Pressure: 750 mm</string>
     <string name="cities">Cities</string>
+    <string name="history">History</string>
 </resources>

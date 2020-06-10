@@ -32,4 +32,6 @@
     <string name="pressure_temp">Pressure: 750 mm</string>
     <string name="cities">Cities</string>
     <string name="history">History</string>
+    <string name="cities_list">Список городов</string>
+    <string name="history_weather">История погоды</string>
 </resources>

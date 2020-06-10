@@ -15,6 +15,7 @@ import com.example.a1l1.onItemClick;
 import com.example.a1l1.R;
 import com.example.a1l1.adapters.RecyclerDataAdapter;
 import com.example.a1l1.adapters.RecyclerDataAdapter.CityWeatherData;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,7 @@ public class CitiesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cities_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_cities_list, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.listRecyclerView);
         RecyclerDataAdapter adapter = new RecyclerDataAdapter(listData);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -39,6 +40,7 @@ public class CitiesFragment extends Fragment {
             @Override
             public void onItemClick(CityWeatherData data) {
                 ((onItemClick) Objects.requireNonNull(getActivity())).onItemClicked(data.getCity(), data.getDegrees());
+                Snackbar.make(view, "Вы выбрали город - " + data.getCity(), Snackbar.LENGTH_LONG).show();
             }
         });
 

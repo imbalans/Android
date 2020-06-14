@@ -69,21 +69,14 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
     }
 
     public static class CityWeatherData {
+        private final String city;
+
+        public CityWeatherData(String city) {
+            this.city = city;
+        }
 
         public String getCity() {
             return city;
-        }
-
-        public String getDegrees() {
-            return degrees;
-        }
-
-        private final String city;
-        private final String degrees;
-
-        public CityWeatherData(String city, String degrees) {
-            this.city = city;
-            this.degrees = degrees;
         }
     }
 }

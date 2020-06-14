@@ -5,10 +5,7 @@
     <string name="enter_your_city">Enter your city</string>
     <string name="start">Start</string>
     <string name="popular_cities">Popular cities</string>
-    <string name="moscow">Moscow</string>
     <string name="st_petersburg">St. Petersburg</string>
-    <string name="sochi">Sochi</string>
-    <string name="kazan">Kazan</string>
     <string name="your_city">Your city</string>
     <string name="wind_speed">Wind speed</string>
     <string name="pressure">Pressure</string>
@@ -34,4 +31,13 @@
     <string name="history">History</string>
     <string name="cities_list">Список городов</string>
     <string name="history_weather">История погоды</string>
+    <string name="select_city">Select city</string>
+    <string name="temp">Температура:</string>
+    <string name="pressure_2">Давление:</string>
+    <string name="humidity">Влажность:</string>
+    <string name="wind_speed2">Скорость ветра:</string>
+    <string name="moscow">Moscow</string>
+    <string name="saint_petersburg">Saint Petersburg</string>
+    <string name="kazan">Kazan</string>
+    <string name="sochi">Sochi</string>
 </resources>

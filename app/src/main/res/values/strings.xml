@@ -23,7 +23,6 @@
     <string name="bold_font">Bold font</string>
     <string name="dark_theme">Dark Theme</string>
     <string name="geolocation">Geolocation</string>
-    <string name="city">City</string>
     <string name="wiki_site">wiki</string>
     <string name="wind_speed_temp">Wind speed: 1.0 m/s</string>
     <string name="pressure_temp">Pressure: 750 mm</string>
@@ -40,4 +39,16 @@
     <string name="saint_petersburg">Saint Petersburg</string>
     <string name="kazan">Kazan</string>
     <string name="sochi">Sochi</string>
+    <string name="city">City</string>
+    <string name="add_city">Add City</string>
+    <string name="change_city">Change City</string>
+    <string name="about">about</string>
+    <string name="about_text">Какой-нибудь текст о приложении!</string>
+    <string name="cities_menu">Города</string>
+    <string name="history_menu">История</string>
+    <string name="about_menu">О приложении</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="weather_forecast_header">Weather Forecast</string>
+    <string name="geekbrains_header">Geekbrains</string>
+    <string name="about_2">О приложении</string>
 </resources>

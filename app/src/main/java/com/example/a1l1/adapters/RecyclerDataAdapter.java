@@ -13,12 +13,22 @@ import com.example.a1l1.R;
 import java.util.ArrayList;
 
 public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapter.ViewHolder> {
-    private ArrayList<CityWeatherData> data;
+    private ArrayList<String> data;
     static OnItemClickListener mItemClickListener;
 
 
-    public RecyclerDataAdapter(ArrayList<CityWeatherData> data) {
+    public RecyclerDataAdapter(ArrayList<String> data) {
         this.data = data;
+    }
+
+    public void addCity(String newCity) {
+        data.add(newCity);
+        notifyItemInserted(data.size() - 1);
+    }
+
+    public void remove() {
+        data.remove(data.size() - 1);
+        notifyItemRemoved(data.size());
     }
 
     @NonNull
@@ -30,7 +40,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        setItemText(holder, data.get(position).city);
+        setItemText(holder, data.get(position));
     }
 
     private void setItemText(@NonNull ViewHolder holder, String text) {
@@ -39,7 +49,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
     @Override
     public int getItemCount() {
-        return data == null ? 0 : data.size();
+        return data.size();
     }
 
 
@@ -61,22 +71,10 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
     }
 
     public interface OnItemClickListener {
-        void onItemClick(CityWeatherData data);
+        void onItemClick(String data);
     }
 
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
         RecyclerDataAdapter.mItemClickListener = mItemClickListener;
-    }
-
-    public static class CityWeatherData {
-        private final String city;
-
-        public CityWeatherData(String city) {
-            this.city = city;
-        }
-
-        public String getCity() {
-            return city;
-        }
     }
 }

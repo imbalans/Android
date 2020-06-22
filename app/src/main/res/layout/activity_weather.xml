@@ -63,12 +63,10 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -94,7 +92,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,7 +99,6 @@
             android:layout_marginStart="105dp"
             android:text="@string/wind_speed2"
             android:textSize="20sp" />
-
 
         <TextView
             android:id="@+id/WindSpeedView"
@@ -114,14 +110,5 @@
             android:textSize="20sp" />
 
     </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnHistory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/history"
-        android:textColor="@color/dark"
-        android:textSize="20sp" />
 
 </LinearLayout>

@@ -9,13 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a1l1.R;
+import com.example.a1l1.models.WeatherRequest;
 
 import java.util.ArrayList;
 
-public class HistoryListDataAdapter extends RecyclerView.Adapter<HistoryListDataAdapter.ViewHolder>{
-    private ArrayList<String> data;
+public class HistoryListDataAdapter extends RecyclerView.Adapter<HistoryListDataAdapter.ViewHolder> {
+    private ArrayList<WeatherRequest> data;
 
-    public HistoryListDataAdapter(ArrayList<String> data){
+    public HistoryListDataAdapter(ArrayList<WeatherRequest> data) {
         this.data = data;
     }
 
@@ -31,8 +32,8 @@ public class HistoryListDataAdapter extends RecyclerView.Adapter<HistoryListData
         setItemText(holder, data.get(position));
     }
 
-    private void setItemText(@NonNull HistoryListDataAdapter.ViewHolder holder, String text){
-        holder.textView.setText(text);
+    private void setItemText(@NonNull ViewHolder holder, WeatherRequest request) {
+        holder.textView.setText(String.format("%s - %s С", request.getName(), request.getMain().getTemp()));
     }
 
     @Override
@@ -40,7 +41,7 @@ public class HistoryListDataAdapter extends RecyclerView.Adapter<HistoryListData
         return data.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
 
         public ViewHolder(@NonNull View itemView) {

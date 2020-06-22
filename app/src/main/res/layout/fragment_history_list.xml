@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        style="@style/DefaultHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/search_history" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_list_data"
         android:layout_width="match_parent"

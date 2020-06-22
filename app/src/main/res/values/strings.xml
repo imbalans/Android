@@ -51,4 +51,5 @@
     <string name="weather_forecast_header">Weather Forecast</string>
     <string name="geekbrains_header">Geekbrains</string>
     <string name="about_2">О приложении</string>
+    <string name="search_history">История поиска</string>
 </resources>

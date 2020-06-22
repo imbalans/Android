@@ -4,19 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.a1l1.OnItemClick;
 import com.example.a1l1.R;
 import com.example.a1l1.models.WeatherRequest;
 
 import java.util.Locale;
-import java.util.Objects;
 
 public class WeatherFragment extends Fragment {
     public final static String cityKey = "cityKey";
@@ -25,7 +22,6 @@ public class WeatherFragment extends Fragment {
     public final static String humidityKey = "humidityKey";
     public final static String windSpeedKey = "windSpeedKey";
     TextView cityNameView, degreesView, pressureView, humidityView, windSpeedView;
-    Button btnHistory;
 
     @Nullable
     @Override
@@ -37,13 +33,6 @@ public class WeatherFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
-
-        btnHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((OnItemClick) Objects.requireNonNull(getActivity())).onHistoryClicked();
-            }
-        });
 
         if (getArguments() != null) {
             String city = getArguments().getString(cityKey);
@@ -60,12 +49,11 @@ public class WeatherFragment extends Fragment {
     }
 
     private void initViews() {
-        cityNameView = Objects.requireNonNull(getView()).findViewById(R.id.CityView);
-        degreesView = getView().findViewById(R.id.DegreesView);
-        pressureView = getView().findViewById(R.id.PressureView);
-        humidityView = getView().findViewById(R.id.HumidityView);
-        windSpeedView = getView().findViewById(R.id.WindSpeedView);
-        btnHistory = getView().findViewById(R.id.btnHistory);
+        cityNameView = requireView().findViewById(R.id.CityView);
+        degreesView = requireView().findViewById(R.id.DegreesView);
+        pressureView = requireView().findViewById(R.id.PressureView);
+        humidityView = requireView().findViewById(R.id.HumidityView);
+        windSpeedView = requireView().findViewById(R.id.WindSpeedView);
     }
 
     public void updateCity(WeatherRequest weatherRequest) {
@@ -80,7 +68,7 @@ public class WeatherFragment extends Fragment {
         String waterValue = String.format(Locale.getDefault(), "%d", weatherRequest.getMain().getHumidity());
         humidityView.setText(waterValue);
 
-        String windSpeed = String.format(Locale.getDefault(), " %d", weatherRequest.getWind().getSpeed());
+        String windSpeed = String.format(Locale.getDefault(), " %.2f", weatherRequest.getWind().getSpeed());
         windSpeedView.setText(windSpeed);
     }
 }

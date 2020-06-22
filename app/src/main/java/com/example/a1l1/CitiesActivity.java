@@ -1,17 +1,18 @@
 package com.example.a1l1;
 
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -26,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -33,6 +35,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class CitiesActivity extends AppCompatActivity implements OnItemClick {
     private AppBarConfiguration mAppBarConfiguration;
+    public ArrayList<WeatherRequest> historyList = new ArrayList<>();
 
     private static final String TAG = "WEATHER";
     private static final String WEATHER_URL =
@@ -43,7 +46,6 @@ public class CitiesActivity extends AppCompatActivity implements OnItemClick {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities);
 
-        // Проблема видимо где то в этом коде :(
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.placeholder);
@@ -56,14 +58,6 @@ public class CitiesActivity extends AppCompatActivity implements OnItemClick {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-        /*if (findViewById(R.id.placeholder) != null) {
-            if (savedInstanceState != null) {
-                return;
-            }
-            CitiesFragment citiesFragment = new CitiesFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.placeholder, citiesFragment).commit();
-        }*/
     }
 
     @Override
@@ -79,25 +73,16 @@ public class CitiesActivity extends AppCompatActivity implements OnItemClick {
         if (weatherFragment != null) {
             weatherFragment.updateCity(weatherRequest);
         } else {
-            WeatherFragment fragment1 = new WeatherFragment();
+            historyList.add(weatherRequest);
             Bundle bundle = new Bundle();
             bundle.putString(WeatherFragment.cityKey, weatherRequest.getName());
             bundle.putString(WeatherFragment.degreesKey, String.valueOf(weatherRequest.getMain().getTemp()));
             bundle.putString(WeatherFragment.pressureKey, String.valueOf(weatherRequest.getMain().getPressure()));
             bundle.putString(WeatherFragment.humidityKey, String.valueOf(weatherRequest.getMain().getHumidity()));
             bundle.putString(WeatherFragment.windSpeedKey, String.valueOf(weatherRequest.getWind().getSpeed()));
-            fragment1.setArguments(bundle);
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.placeholder, fragment1);
-            ft.addToBackStack(null);
-            ft.commit();
-        }
-    }
 
-    @Override
-    public void onHistoryClicked() {
-        Intent intent = new Intent(this, HistoryActivity.class);
-        startActivity(intent);
+            Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigate(R.id.nav_weather, bundle);
+        }
     }
 
     @Override
@@ -127,6 +112,17 @@ public class CitiesActivity extends AppCompatActivity implements OnItemClick {
                     } catch (Exception e) {
                         Log.e(TAG, "Fail connection", e);
                         e.printStackTrace();
+                        Looper.prepare();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CitiesActivity.this);
+                        builder.setTitle("Такой город не найден!")
+                                .setMessage("Введите название города еще раз.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                }).create().show();
+                        Looper.loop();
                     } finally {
                         if (null != urlConnection) {
                             urlConnection.disconnect();

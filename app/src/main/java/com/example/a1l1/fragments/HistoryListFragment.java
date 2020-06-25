@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a1l1.CitiesActivity;
+import com.example.a1l1.MainActivity;
 import com.example.a1l1.R;
 import com.example.a1l1.adapters.HistoryListDataAdapter;
 
@@ -25,7 +25,7 @@ public class HistoryListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history_list, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.history_list_data);
-        historyListDataAdapter = new HistoryListDataAdapter(((CitiesActivity) requireActivity()).historyList);
+        historyListDataAdapter = new HistoryListDataAdapter(((MainActivity) requireActivity()).historyList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         recyclerView.setLayoutManager(layoutManager);

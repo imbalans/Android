@@ -1,7 +1,7 @@
 package com.example.a1l1.models;
 
 public class Wind {
-    private float speed;
+    private double speed;
     private int deg;
 
     public int getDeg() {
@@ -12,8 +12,8 @@ public class Wind {
         this.deg = deg;
     }
 
-    public float getSpeed() {
-        return speed;
+    public int getSpeed() {
+        return (int) speed;
     }
 
     public void setSpeed(int speed) {

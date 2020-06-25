@@ -46,7 +46,6 @@ public class CitiesFragment extends Fragment {
             @Override
             public void onItemClick(String data) {
                 ((OnItemClick) requireActivity()).connect(data);
-                Snackbar.make(requireView(), "Вы выбрали город - " + data, Snackbar.LENGTH_LONG).show();
             }
         });
 

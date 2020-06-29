@@ -1,6 +1,6 @@
 package com.example.a1l1;
 
-import com.example.a1l1.models.WeatherRequest;
+import com.rest.entities.WeatherRequest;
 
 public interface OnItemClick {
     void onItemClicked(WeatherRequest weatherRequest);

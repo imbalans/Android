@@ -12,7 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.a1l1.fragments.WeatherFragment;
-import com.example.a1l1.models.WeatherRequest;
+import com.rest.entities.WeatherRequest;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -51,11 +51,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     public void onItemClicked(WeatherRequest weatherRequest) {
         historyList.add(weatherRequest);
         Bundle bundle = new Bundle();
-        bundle.putString(WeatherFragment.cityKey, weatherRequest.getName());
-        bundle.putString(WeatherFragment.degreesKey, String.valueOf(weatherRequest.getMain().getTemp()));
-        bundle.putString(WeatherFragment.pressureKey, String.valueOf(weatherRequest.getMain().getPressure()));
-        bundle.putString(WeatherFragment.humidityKey, String.valueOf(weatherRequest.getMain().getHumidity()));
-        bundle.putString(WeatherFragment.windSpeedKey, String.valueOf(weatherRequest.getWind().getSpeed()));
+        bundle.putString(WeatherFragment.cityKey, weatherRequest.name);
+        bundle.putString(WeatherFragment.degreesKey, String.valueOf(weatherRequest.main.temp));
+        bundle.putString(WeatherFragment.pressureKey, String.valueOf(weatherRequest.main.pressure));
+        bundle.putString(WeatherFragment.humidityKey, String.valueOf(weatherRequest.main.humidity));
+        bundle.putString(WeatherFragment.windSpeedKey, String.valueOf(weatherRequest.wind.speed));
 
         Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigate(R.id.nav_weather, bundle);
     }

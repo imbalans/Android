@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a1l1.R;
-import com.example.a1l1.models.WeatherRequest;
+import com.rest.entities.WeatherRequest;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class HistoryListDataAdapter extends RecyclerView.Adapter<HistoryListData
     }
 
     private void setItemText(@NonNull ViewHolder holder, WeatherRequest request) {
-        holder.textView.setText(String.format("%s - %s С", request.getName(), request.getMain().getTemp()));
+        holder.textView.setText(String.format("%s - %s С", request.name, request.main.temp));
     }
 
     @Override

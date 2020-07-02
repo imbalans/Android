@@ -9,15 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a1l1.R;
-import com.rest.entities.WeatherRequest;
+import com.example.a1l1.models.History;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class HistoryListDataAdapter extends RecyclerView.Adapter<HistoryListDataAdapter.ViewHolder> {
-    private ArrayList<WeatherRequest> data;
+    List<History> histories;
 
-    public HistoryListDataAdapter(ArrayList<WeatherRequest> data) {
-        this.data = data;
+    public HistoryListDataAdapter(List<History> histories) {
+        this.histories = histories;
     }
 
     @NonNull
@@ -29,16 +29,13 @@ public class HistoryListDataAdapter extends RecyclerView.Adapter<HistoryListData
 
     @Override
     public void onBindViewHolder(@NonNull HistoryListDataAdapter.ViewHolder holder, int position) {
-        setItemText(holder, data.get(position));
-    }
-
-    private void setItemText(@NonNull ViewHolder holder, WeatherRequest request) {
-        holder.textView.setText(String.format("%s - %s С", request.name, request.main.temp));
+        History hs = histories.get(position);
+        holder.textView.setText(String.format("%s - %s C", hs.getCityName(), hs.getDegreesValue()));
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return histories.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

@@ -10,22 +10,25 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
 
+import com.example.a1l1.database.HistoryDatabase;
 import com.example.a1l1.fragments.WeatherFragment;
+import com.example.a1l1.models.History;
 import com.rest.entities.WeatherRequest;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements OnItemClick {
     private AppBarConfiguration mAppBarConfiguration;
-    public ArrayList<WeatherRequest> historyList = new ArrayList<>();
+    public static HistoryDatabase historyDatabase;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities);
+        historyDatabase = Room.databaseBuilder(getApplicationContext(), HistoryDatabase.class, "infoDB")
+                .allowMainThreadQueries().build();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,7 +52,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
 
     @Override
     public void onItemClicked(WeatherRequest weatherRequest) {
-        historyList.add(weatherRequest);
+        History history = new History();
+        history.setCityName(weatherRequest.name);
+        history.setDegreesValue(String.valueOf(weatherRequest.main.temp));
+        historyDatabase.getHistoryDao().addData(history);
+
         Bundle bundle = new Bundle();
         bundle.putString(WeatherFragment.cityKey, weatherRequest.name);
         bundle.putString(WeatherFragment.degreesKey, String.valueOf(weatherRequest.main.temp));

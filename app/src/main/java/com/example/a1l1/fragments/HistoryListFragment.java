@@ -1,5 +1,7 @@
 package com.example.a1l1.fragments;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,24 +16,48 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a1l1.MainActivity;
 import com.example.a1l1.R;
 import com.example.a1l1.adapters.HistoryListDataAdapter;
+import com.example.a1l1.models.History;
+
+import java.util.List;
 
 
 public class HistoryListFragment extends Fragment {
-    HistoryListDataAdapter historyListDataAdapter;
+    RecyclerView recyclerView;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history_list, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.history_list_data);
-        historyListDataAdapter = new HistoryListDataAdapter(((MainActivity) requireActivity()).historyList);
+        recyclerView = view.findViewById(R.id.history_list_data);
+        recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(historyListDataAdapter);
+        getData();
 
         return view;
+    }
+
+    private void getData() {
+        @SuppressLint("StaticFieldLeak")
+        class GetData extends AsyncTask<Void, Void, List<History>> {
+
+            @Override
+            protected List<History> doInBackground(Void... voids) {
+                List<History> histories = MainActivity.historyDatabase.getHistoryDao().getMyData();
+                return histories;
+            }
+
+            @Override
+            protected void onPostExecute(List<History> histories) {
+                HistoryListDataAdapter historyListDataAdapter = new HistoryListDataAdapter(histories);
+                recyclerView.setAdapter(historyListDataAdapter);
+                super.onPostExecute(histories);
+            }
+        }
+
+        GetData gd = new GetData();
+        gd.execute();
     }
 
     @Override

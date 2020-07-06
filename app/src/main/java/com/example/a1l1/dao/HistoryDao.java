@@ -15,9 +15,9 @@ public interface HistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addData(History history);
 
-    @Query("SELECT * FROM mydatalist")
+    @Query("SELECT * FROM mydatahistory")
     List<History> getMyData();
 
-    @Delete
-    void delete(History history);
+    @Query("DELETE FROM mydatahistory")
+    void delete();
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,12 +19,13 @@ import com.example.a1l1.R;
 import com.example.a1l1.adapters.HistoryListDataAdapter;
 import com.example.a1l1.models.History;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class HistoryListFragment extends Fragment {
     RecyclerView recyclerView;
-
+    Button btnClear;
 
     @Nullable
     @Override
@@ -35,12 +37,22 @@ public class HistoryListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         getData();
 
+        btnClear = view.findViewById(R.id.btnClear);
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.historyDatabase.getHistoryDao().delete();
+                recyclerView.setAdapter(new HistoryListDataAdapter(new ArrayList<>()));
+            }
+        });
+
+
         return view;
     }
 
-    private void getData() {
+    private void getData(){
         @SuppressLint("StaticFieldLeak")
-        class GetData extends AsyncTask<Void, Void, List<History>> {
+        class GetData extends AsyncTask<Void, Void, List<History>>{
 
             @Override
             protected List<History> doInBackground(Void... voids) {

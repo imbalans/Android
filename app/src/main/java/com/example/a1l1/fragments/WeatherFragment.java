@@ -1,5 +1,7 @@
 package com.example.a1l1.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +34,8 @@ public class WeatherFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews();
 
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+
         if (getArguments() != null) {
             String city = getArguments().getString(cityKey);
             cityNameView.setText(city);
@@ -47,6 +51,12 @@ public class WeatherFragment extends Fragment {
 
             String windSpeed = getArguments().getString(windSpeedKey);
             windSpeedView.setText(windSpeed);
+
+            sharedPreferences.edit().putString(cityKey, city).apply();
+            sharedPreferences.edit().putString(degreesKey, temperatureValue).apply();
+            sharedPreferences.edit().putString(pressureKey, pressureText).apply();
+            sharedPreferences.edit().putString(humidityKey, humidityValue).apply();
+            sharedPreferences.edit().putString(windSpeedKey, windSpeed).apply();
         }
     }
 

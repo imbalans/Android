@@ -53,4 +53,5 @@
     <string name="about_2">О приложении</string>
     <string name="search_history">История поиска</string>
     <string name="network_error">Check your internet connection!</string>
+    <string name="clear_history_list">Очистить</string>
 </resources>

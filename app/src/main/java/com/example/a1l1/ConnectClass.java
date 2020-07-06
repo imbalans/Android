@@ -1,6 +1,7 @@
 package com.example.a1l1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.rest.OpenWeatherRepo;
@@ -11,10 +12,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ConnectClass {
-    private final MainActivity mainActivity;
 
-    public ConnectClass(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    @Nullable
+    private OnItemClick listener;
+
+    public void setListener(@Nullable OnItemClick listener) {
+        this.listener = listener;
     }
 
     public void connectOnServer(String city) {
@@ -25,26 +28,21 @@ public class ConnectClass {
                     public void onResponse(@NonNull Call<WeatherRequest> call,
                                            @NonNull Response<WeatherRequest> response) {
                         if (response.body() != null && response.isSuccessful()) {
-                            mainActivity.onItemClicked(response.body());
+                            if(listener != null){
+                                listener.onItemClicked(response.body());
+                            }
                         } else {
-                            if (response.code() == 404) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
-                                builder.setTitle("Такой город не найден!")
-                                        .setMessage("Введите название города еще раз.")
-                                        .setCancelable(false)
-                                        .setPositiveButton("OK", (dialog, which) -> {
-                                        }).create().show();
+                            if (response.code() == 404 && listener != null) {
+                                listener.onCityNotFound();
                             }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<WeatherRequest> call, Throwable t) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
-                        builder.setMessage("Отсутствует интернет соединение!")
-                                .setCancelable(false)
-                                .setPositiveButton("OK", (dialog, which) -> {
-                                }).create().show();
+                        if(listener != null){
+                            listener.onError();
+                        }
                     }
                 });
     }

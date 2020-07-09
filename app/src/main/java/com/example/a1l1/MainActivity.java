@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        if(sharedPreferences.getString(WeatherFragment.cityKey, null) != null){
+        if (sharedPreferences.getString(WeatherFragment.cityKey, null) != null) {
             openWeatherFragment(getData(WeatherFragment.cityKey),
                     getData(WeatherFragment.degreesKey),
                     getData(WeatherFragment.humidityKey),
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         }
     }
 
-    private String getData(String key){
+    private String getData(String key) {
         return sharedPreferences.getString(key, null);
     }
 
@@ -115,10 +115,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         historyDatabase.getHistoryDao().addData(history);
 
         openWeatherFragment(String.valueOf(weatherRequest.name),
-                String.valueOf((int)weatherRequest.main.temp),
-                String.valueOf((int)weatherRequest.main.pressure),
-                String.valueOf((int)weatherRequest.main.humidity),
-                String.valueOf((int)weatherRequest.wind.speed));
+                String.valueOf((int) weatherRequest.main.temp),
+                String.valueOf((int) weatherRequest.main.pressure),
+                String.valueOf((int) weatherRequest.main.humidity),
+                String.valueOf((int) weatherRequest.wind.speed));
     }
 
     private void openWeatherFragment(String cityName, String degrees, String pressure, String humidity, String windSpeed) {
@@ -138,6 +138,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     }
 
     @Override
+    public void connectByLocation(String lat, String lon) {
+        connectClass.connectByLocation(lat, lon);
+    }
+
+    @Override
     public void onCityNotFound() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Такой город не найден!")
@@ -149,6 +154,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
 
     @Override
     public void onError() {
-        Toast.makeText(getBaseContext(), getString(R.string.network_error),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), getString(R.string.network_error), Toast.LENGTH_SHORT).show();
     }
 }

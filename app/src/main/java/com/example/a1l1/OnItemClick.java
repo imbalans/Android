@@ -5,6 +5,7 @@ import com.rest.entities.WeatherRequest;
 public interface OnItemClick {
     void onItemClicked(WeatherRequest weatherRequest);
     void connect(String cityName);
+    void connectByLocation(String lat, String lon);
     void onCityNotFound();
     void onError();
 }

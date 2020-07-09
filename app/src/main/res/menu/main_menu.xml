@@ -18,4 +18,9 @@
         android:id="@+id/change_city"
         android:title="@string/city"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/myLocation"
+        android:title="Location"
+        app:showAsAction="ifRoom" />
 </menu>

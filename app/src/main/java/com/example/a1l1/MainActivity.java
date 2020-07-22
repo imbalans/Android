@@ -1,5 +1,7 @@
 package com.example.a1l1;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -7,15 +9,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -32,7 +40,7 @@ import com.rest.entities.WeatherRequest;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class MainActivity extends AppCompatActivity implements OnItemClick {
+public class MainActivity extends AppCompatActivity implements OnItemClick, LocationListener {
     private AppBarConfiguration mAppBarConfiguration;
     public static HistoryDatabase historyDatabase;
     private ConnectClass connectClass = new ConnectClass();
@@ -46,11 +54,67 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         setContentView(R.layout.activity_cities);
         historyDatabase = Room.databaseBuilder(getApplicationContext(), HistoryDatabase.class, "infoDB")
                 .allowMainThreadQueries().build();
+        initReceivers();
+        initDrawer();
+        sharedPref();
 
-        registerReceiver(batteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
-        registerReceiver(internetReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-        initNotificationChannel();
+        if (savedInstanceState == null) {
+            if (BuildConfig.IS_ADMIN) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED
+                        || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
 
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+                } else {
+                    openWeatherByLocation();
+                }
+            } else {
+                connect("Moscow");
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private void openWeatherByLocation() {
+        LocationManager mLocManager;
+        mLocManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        Location loc = mLocManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        assert loc != null;
+        String lat = String.valueOf(loc.getLatitude());
+        String lon = String.valueOf(loc.getLongitude());
+        connectByLocation(lat, lon);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == 100) {
+            boolean permissionsGranted = true;
+            for (int grantResult : grantResults) {
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                    permissionsGranted = false;
+                    break;
+                }
+            }
+            if (permissionsGranted) openWeatherByLocation();
+        }
+    }
+
+    private void sharedPref() {
+        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        if (sharedPreferences.getString(WeatherFragment.cityKey, null) != null) {
+            openWeatherFragment(getData(WeatherFragment.cityKey),
+                    getData(WeatherFragment.degreesKey),
+                    getData(WeatherFragment.humidityKey),
+                    getData(WeatherFragment.pressureKey),
+                    getData(WeatherFragment.windSpeedKey));
+        }
+    }
+
+    private void initDrawer() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.placeholder);
@@ -62,15 +126,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
 
-        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        if (sharedPreferences.getString(WeatherFragment.cityKey, null) != null) {
-            openWeatherFragment(getData(WeatherFragment.cityKey),
-                    getData(WeatherFragment.degreesKey),
-                    getData(WeatherFragment.humidityKey),
-                    getData(WeatherFragment.pressureKey),
-                    getData(WeatherFragment.windSpeedKey));
-        }
+    private void initReceivers() {
+        registerReceiver(batteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
+        registerReceiver(internetReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        initNotificationChannel();
     }
 
     private void initNotificationChannel() {
@@ -155,5 +216,25 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     @Override
     public void onError() {
         Toast.makeText(getBaseContext(), getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

@@ -11,37 +11,22 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="0dp"
         android:textColor="@color/dark"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:text="Moscow"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/DegreesView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="105dp"
-            android:text="@string/temp"
-            android:textColor="@color/dark"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/DegreesView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/dark"
-            android:textSize="20sp" />
-
-    </LinearLayout>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="40dp"
+        android:textColor="@color/dark"
+        android:textSize="40sp"
+        android:text="25"/>
 
     <LinearLayout
         android:layout_width="match_parent"

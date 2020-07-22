@@ -2,17 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/add"
-        android:icon="@android:drawable/ic_input_add"
-        android:title="add"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/remove"
-        android:icon="@android:drawable/ic_delete"
-        android:title="remove"
-        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/change_city"
@@ -21,6 +10,11 @@
 
     <item
         android:id="@+id/myLocation"
-        android:title="Location"
+        android:title="@string/gps"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/googleAuth"
+        android:title="@string/sign_in"
         app:showAsAction="ifRoom" />
 </menu>

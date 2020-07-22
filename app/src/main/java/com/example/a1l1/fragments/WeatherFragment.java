@@ -1,5 +1,6 @@
 package com.example.a1l1.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class WeatherFragment extends Fragment {
         return inflater.inflate(R.layout.activity_weather, container, false);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -41,7 +43,7 @@ public class WeatherFragment extends Fragment {
             cityNameView.setText(city);
 
             String temperatureValue = getArguments().getString(degreesKey);
-            degreesView.setText(temperatureValue);
+            degreesView.setText(temperatureValue + "\u2103");
 
             String pressureText = getArguments().getString(pressureKey);
             pressureView.setText(pressureText);

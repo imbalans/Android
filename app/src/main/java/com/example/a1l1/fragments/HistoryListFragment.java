@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,7 +28,6 @@ import java.util.List;
 
 public class HistoryListFragment extends Fragment {
     RecyclerView recyclerView;
-    Button btnClear;
 
     @Nullable
     @Override
@@ -35,24 +37,15 @@ public class HistoryListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+        setHasOptionsMenu(true);
         getData();
-
-        btnClear = view.findViewById(R.id.btnClear);
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.historyDatabase.getHistoryDao().delete();
-                recyclerView.setAdapter(new HistoryListDataAdapter(new ArrayList<>()));
-            }
-        });
-
 
         return view;
     }
 
-    private void getData(){
+    private void getData() {
         @SuppressLint("StaticFieldLeak")
-        class GetData extends AsyncTask<Void, Void, List<History>>{
+        class GetData extends AsyncTask<Void, Void, List<History>> {
 
             @Override
             protected List<History> doInBackground(Void... voids) {
@@ -75,5 +68,21 @@ public class HistoryListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_history, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.clear) {
+            MainActivity.historyDatabase.getHistoryDao().delete();
+            recyclerView.setAdapter(new HistoryListDataAdapter(new ArrayList<>()));
+            return true;
+        }
+        return false;
     }
 }

@@ -30,7 +30,7 @@ public class HistoryListDataAdapter extends RecyclerView.Adapter<HistoryListData
     @Override
     public void onBindViewHolder(@NonNull HistoryListDataAdapter.ViewHolder holder, int position) {
         History hs = histories.get(position);
-        holder.textView.setText(String.format("%s - %s C", hs.getCityName(), hs.getDegreesValue()));
+        holder.textView.setText(String.format("%s - %s " + "\u2103", hs.getCityName(), hs.getDegreesValue()));
     }
 
     @Override

@@ -22,33 +22,46 @@ android {
         }
     }
 
-    compileOptions {
-        targetCompatibility = "8"
-        sourceCompatibility = "8"
+    flavorDimensions 'view'
+    productFlavors {
+        cityVersion {
+            dimension "view"
+            buildConfigField 'boolean', 'IS_ADMIN', 'false'
+        }
+
+        gpsVersion {
+            dimension "view"
+            buildConfigField 'boolean', 'IS_ADMIN', 'true'
+        }
     }
 
-}
+        compileOptions {
+            targetCompatibility = "8"
+            sourceCompatibility = "8"
+        }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    }
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    implementation 'androidx.navigation:navigation-ui:2.3.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.8.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.8.2'
-    implementation "android.arch.persistence.room:runtime:1.1.1"
-    implementation 'com.google.firebase:firebase-analytics:17.4.3'
-    implementation 'com.google.firebase:firebase-messaging:20.2.1'
-    implementation 'com.google.android.libraries.maps:maps:3.1.0-beta'
-    implementation 'com.google.android.gms:play-services-gcm:17.0.0'
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-}
+    dependencies {
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        implementation 'com.google.android.gms:play-services-auth:18.1.0'
+        implementation 'androidx.appcompat:appcompat:1.1.0'
+        implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+        implementation 'androidx.recyclerview:recyclerview:1.1.0'
+        implementation 'com.google.android.material:material:1.1.0'
+        implementation 'com.google.code.gson:gson:2.8.6'
+        implementation 'androidx.navigation:navigation-fragment:2.3.0'
+        implementation 'androidx.navigation:navigation-ui:2.3.0'
+        implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+        implementation 'com.squareup.retrofit2:retrofit:2.8.2'
+        implementation 'com.squareup.retrofit2:converter-gson:2.8.2'
+        implementation "android.arch.persistence.room:runtime:1.1.1"
+        implementation 'com.google.firebase:firebase-analytics:17.4.4'
+        implementation 'com.google.firebase:firebase-messaging:20.2.3'
+        implementation 'com.google.android.libraries.maps:maps:3.1.0-beta'
+        implementation 'com.google.android.gms:play-services-gcm:17.0.0'
+        annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+        testImplementation 'junit:junit:4.12'
+        androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+        androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    }
